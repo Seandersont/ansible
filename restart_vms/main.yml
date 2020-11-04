@@ -1,0 +1,23 @@
+---
+- name: Start virtual machines on Deathstar
+  hosts: localhost
+  become: true
+  vars:
+  tasks:
+    - name: List virtual machines status
+      virt:
+        command: list_vms
+      register: vm_list
+#   
+#   - debug:
+#        var: vmlist 
+    
+    - name: Start virtual machines
+      virt:
+        name: "{{ item }}"
+        state: running
+      loop: "{{ vm_list['list_vms'] }}"
+
+    - name: Ensure IP configuration
+      include_tasks: tasks/check-connection.yml
+      loop: "{{ vm_list['list_vms'] }}"
