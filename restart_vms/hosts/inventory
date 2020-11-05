@@ -1,9 +1,0 @@
-[host]
-deathstar.seandersontech.com
-[deathstar-vms]
-jedi.seandersontech.com
-sith.seandersontech.com
-terraria.seandersontech.com
-[lab-environment]
-jedi.seandersontech.com
-sith.seandersontech.com
