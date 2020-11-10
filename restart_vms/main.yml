@@ -1,6 +1,6 @@
 ---
 - name: Start virtual machines on Deathstar
-  hosts: localhost
+  hosts: host
   become: true
   vars:
   tasks:
