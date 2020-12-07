@@ -1,0 +1,15 @@
+---
+- name: Create VM from template
+  virt:
+    command: define
+    xml: "{{ lookup('template', 'templates/vm_template.xml.j2') }}"
+
+- name: Check {{ name }}.qcow2 exists
+  stat:
+    path: /home/seandersont/.local/share/libvirt/images/{{ name }}.qcow2
+  register: stat_result
+
+- name: Create {{ name }}.qcow2
+  command: qemu-img create -f qcow2 /home/seandersont/.local/share/libvirt/images/{{ name }}.qcow2 40
+  when: not stat_result.stat.exists
+  

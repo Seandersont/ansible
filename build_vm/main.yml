@@ -1,0 +1,10 @@
+---
+- name: Define and start new vms
+  hosts: localhost
+  vars:
+    name: name
+
+  tasks:
+    - name: Define and install vms
+      import_tasks: tasks/main.yml
+
