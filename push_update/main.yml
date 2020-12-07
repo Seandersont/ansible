@@ -2,7 +2,6 @@
 - name: Update hosts to latest version
   hosts: deathstar_servers 
   become: true
-  become_user: seandersont
 
   tasks:
     - name: Update host applications to latest version
