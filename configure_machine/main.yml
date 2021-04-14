@@ -1,0 +1,15 @@
+---
+- name: push configuration files to vm's
+  hosts: deathstar_servers
+  become: yes
+
+  tasks:
+    - name: copy vim files to destination
+      copy:
+        src: /home/seandersont/.vim/
+        dest: /home/seandersont/.vim/
+    - name: copy vimrc to destination
+      copy:
+        src: /home/seandersont/.vimrc
+        dest: /home/seandersont/.vimrc
+...

@@ -1,10 +1,14 @@
 ---
 - name: Update hosts to latest version
   hosts: deathstar_servers 
-  become: yes
-
+  become: true
   tasks:
     - name: Update host applications to latest version
       yum: 
         name: '*'
         state: latest
+      register: yum_results
+
+#    - debug:
+#        var: yum_results.results
+

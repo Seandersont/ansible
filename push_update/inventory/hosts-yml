@@ -1,0 +1,18 @@
+---
+all:
+  hosts:
+    imaginary-host:
+  children:
+    deathstar_servers:
+      hosts:
+        deathstar.seandersontech.com:
+          ansible_connection: local
+        jedi.seandersontech.com:
+        sith.seandersontech.com:
+    raspberry:
+      hosts:
+        littlered.seandersontech.com:
+        jedi.seandersontech.com:
+    webservers:
+      hosts:
+        192.168.1.[91:95]:

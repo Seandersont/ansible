@@ -1,0 +1,12 @@
+[deathstar_servers]
+deathstar.seandersontech.com ansible_connection=local
+jedi.seandersontech.com
+sith.seandersontech.com
+
+[raspberry]
+littlered.seandersontech.com
+jedi.seandersontech.com
+
+[webservers]
+node-[91:95]
+
