@@ -2,6 +2,10 @@
 - name: Update hosts to latest version
   hosts: deathstar_servers 
   become: true
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of c85acca (changed become to yes instead of true)
   tasks:
     - name: Update host applications to latest version
       yum: 
