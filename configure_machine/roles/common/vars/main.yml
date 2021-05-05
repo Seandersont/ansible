@@ -1,0 +1,22 @@
+---
+users:
+  - name: 'seandersont'
+    comment: 'Sean Anderson'
+    groups: 'wheel'
+  - name: 'john'
+    comment: 'User 1'
+    groups: ''
+  - name: 'ian'
+    comment: "User 2"
+    groups: ''
+  - name: 'janice'
+    comment: "User 3"
+    groups: ''
+
+vim:
+  src: .vim/
+  dest: /usr/share/vim/
+
+vimrc:
+  src: .vimrc
+  dest: /etc/vimrc

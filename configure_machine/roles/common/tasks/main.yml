@@ -1,0 +1,26 @@
+---
+- name: Verify users exist
+  user:
+    name: "{{ item.name }}"
+    comment: "{{ item.comment }}"
+    groups: "{{ item.groups }}"
+  loop: "{{ users }}"
+
+- name: install vim package
+  dnf:
+    name: vim
+    state: latest
+  when: ansible_facts['os_family'] == "RedHat"
+
+- name: Verify vim folders exist
+  copy:
+    src: "{{ vim.src }}"
+    dest: "{{ vim.dest }}"
+    mode: '0644'
+
+- name: Ensure vimrc contains customizations
+  blockinfile:
+    block: "{{ lookup('file', 'vimrc') }}"
+    path: "{{ vimrc.dest }}"
+    marker: "\" {mark} ANSIBLE MANAGED BLOCK"
+...

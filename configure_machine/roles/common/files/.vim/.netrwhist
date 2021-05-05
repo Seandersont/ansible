@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/seandersont/gitRepos/ansible/build_vm'
+let g:netrw_dirhist_2='/home/seandersont/gitRepos/ansible'
+let g:netrw_dirhist_3='/home/seandersont/gitRepos'
+let g:netrw_dirhist_4='/home/seandersont'
+let g:netrw_dirhist_5='/home'
+let g:netrw_dirhist_6='/'
+let g:netrw_dirhist_7='/home/seandersont/gitRepos/ansible/build_vm'

@@ -1,0 +1,7 @@
+---
+- name: Create Users and Verify Packages 
+  hosts: pi_cluster
+  become: yes
+  roles:
+    - common
+...
