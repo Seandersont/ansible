@@ -6,11 +6,17 @@
     groups: "{{ item.groups }}"
   loop: "{{ users }}"
 
-- name: install vim package
+- name: install vim package - fedora/RHEL/CentOS
   dnf:
     name: vim
     state: latest
   when: ansible_facts['os_family'] == "RedHat"
+
+- name: install vim package - Debian
+  apt:
+    name: vim
+    state: latest
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: Verify vim folders exist
   copy:
@@ -23,4 +29,25 @@
     block: "{{ lookup('file', 'vimrc') }}"
     path: "{{ vimrc.dest }}"
     marker: "\" {mark} ANSIBLE MANAGED BLOCK"
+
+- name: set vim as default editor in bashrc
+  lineinfile:
+    line: "export EDITOR=vim"
+    dest: /etc/bashrc
+
+- name: set vim as default visual editor in bashrc
+  lineinfile:
+    line: "export VISUAL=vim"
+    dest: /etc/bashrc
+
+- name: Add bash prompt config line in bashrc
+  lineinfile:
+    line: "{{ bashrc }}"
+    dest: /etc/bashrc
+
+- name: Edit Sudoers file to not require password
+  lineinfile:
+    path: /etc/sudoers
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: '/usr/sbin/visudo -cf %s'
 ...

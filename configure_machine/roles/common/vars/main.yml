@@ -15,8 +15,10 @@ users:
 
 vim:
   src: .vim/
-  dest: /usr/share/vim/
+  dest: /usr/share/vim/vimfiles/
 
 vimrc:
   src: .vimrc
   dest: /etc/vimrc
+
+bashrc: 'export PS1="\[\e[1;31m\][\d \A] \[\e[4;36m\]\u@\H\[\e[0;34m\] \W \n\[\e[00;1;32m\]>>  \[\e[37m\]"'
