@@ -1,0 +1,27 @@
+---
+- name: install vim package - fedora/RHEL/CentOS
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ packages }}"
+  when: ansible_facts['os_family'] == "RedHat"
+
+- name: Install Packages - Debian
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ packages }}"
+  when: ansible_facts['os_family'] == "Debian"
+  ignore_errors: yes
+
+- name: Update Packages - fedora/RHEL/CentOS
+  dnf:
+    name: "*"
+    state: latest
+  when: ansible_facts['os_family'] == "RedHat"
+
+- name: Install Packages - Debian
+  apt:
+    name: "*"
+    state: latest
+  when: ansible_facts['os_family'] == "Debian"

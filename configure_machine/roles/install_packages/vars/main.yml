@@ -1,0 +1,6 @@
+---
+packages:
+  - vim
+  - podman
+  - buildah
+  - python3

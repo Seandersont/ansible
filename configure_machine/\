@@ -1,0 +1,11 @@
+[control]
+[worker]
+[test]
+sith.seandersontech.com
+rebels.seandersontech.com
+empire.seandersontech.com
+mandalorian.seandersontech.com
+[pi_cluster:children]
+control
+worker
+test

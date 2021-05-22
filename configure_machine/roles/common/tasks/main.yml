@@ -1,4 +1,15 @@
 ---
+- name: Copy .bashrc file to /etc/skel/
+  copy:
+    src: "{{ skel.src }}"
+    dest: "{{ skel.dest }}"
+    mode: '0644'
+
+- name: Verify Wheel group exists
+  group:
+    name: wheel
+    state: present
+
 - name: Verify users exist
   user:
     name: "{{ item.name }}"
@@ -6,13 +17,13 @@
     groups: "{{ item.groups }}"
   loop: "{{ users }}"
 
-- name: install vim package - fedora/RHEL/CentOS
+- name: Install vim package - Fedora/RHEL/CentOS
   dnf:
     name: vim
     state: latest
   when: ansible_facts['os_family'] == "RedHat"
 
-- name: install vim package - Debian
+- name: Install vim package - Debian
   apt:
     name: vim
     state: latest
@@ -24,26 +35,55 @@
     dest: "{{ vim.dest }}"
     mode: '0644'
 
-- name: Ensure vimrc contains customizations
+- name: Ensure vimrc contains customizations - Fedora/RHEL/CentOS
   blockinfile:
     block: "{{ lookup('file', 'vimrc') }}"
     path: "{{ vimrc.dest }}"
     marker: "\" {mark} ANSIBLE MANAGED BLOCK"
+  when: ansible_facts['os_family'] == "RedHat"
 
-- name: set vim as default editor in bashrc
+- name: Ensure vimrc contains customizations - Debian
+  blockinfile:
+    block: "{{ lookup('file', 'vimrc') }}"
+    path: "{{ vimrc.debdest }}"
+    marker: "\" {mark} ANSIBLE MANAGED BLOCK"
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: set vim as default editor in bashrc - Fedora/RHEL/CentOS 
   lineinfile:
     line: "export EDITOR=vim"
     dest: /etc/bashrc
+  when: ansible_facts['os_family'] == "RedHat"
 
-- name: set vim as default visual editor in bashrc
+- name: set vim as default editor in bashrc - Debian
+  lineinfile:
+    line: "export EDITOR=vim"
+    dest: /etc/bash.bashrc
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: set vim as default visual editor in bashrc - Fedora/RHEL/CentOS
   lineinfile:
     line: "export VISUAL=vim"
     dest: /etc/bashrc
+  when: ansible_facts['os_family'] == "RedHat"
 
-- name: Add bash prompt config line in bashrc
+- name: set vim as default visual editor in bashrc - Debian
+  lineinfile:
+    line: "export VISUAL=vim"
+    dest: /etc/bash.bashrc
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Add bash prompt config line in bashrc - Fedora/RHEL/CentOS
   lineinfile:
     line: "{{ bashrc }}"
     dest: /etc/bashrc
+  when: ansible_facts['os_family'] == "RedHat"
+
+- name: Add bash prompt config line in bashrc - Debian
+  lineinfile:
+    line: "{{ bashrc }}"
+    dest: /etc/bash.bashrc
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: Edit Sudoers file to not require password
   lineinfile:
