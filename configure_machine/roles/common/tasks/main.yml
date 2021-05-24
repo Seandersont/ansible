@@ -1,4 +1,6 @@
 ---
+- include_vars: vault.yml
+
 - name: Copy .bashrc file to /etc/skel/
   copy:
     src: "{{ skel.src }}"
@@ -15,6 +17,8 @@
     name: "{{ item.name }}"
     comment: "{{ item.comment }}"
     groups: "{{ item.groups }}"
+    password: "{{ password }}" 
+    update_password: always
   loop: "{{ users }}"
 
 - name: Install vim package - Fedora/RHEL/CentOS
