@@ -2,9 +2,14 @@
 - name: Set MOTD on webservers
   hosts: goldsquad
   vars:
+  become: true
   tasks:
     - name: Get MOTD with echo
       ansible.builtin.command: cat /etc/motd
+      register: motd
+
+    - debug:
+      msg: {{motd}}
 
     - name: Set MOTD
       template:
