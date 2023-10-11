@@ -26,5 +26,5 @@
 
     - name: Display new MOTD
       ansible.builtin.debug:
-        var: motd_changed.stdout
+        var: motd_changed
 ...
