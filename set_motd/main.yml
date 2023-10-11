@@ -1,0 +1,7 @@
+---
+- name: Set MOTD on webservers
+  hosts: goldsquad
+  vars:
+  tasks:
+    - name: Set MOTD
+...
