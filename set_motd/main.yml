@@ -5,7 +5,7 @@
   become: true
   tasks:
     - name: Get MOTD
-      ansible.builtin.shell: cat /etc/motd
+      ansible.builtin.command: cat /etc/motd
       register: motd
 
     - ansible.builtin.debug:
@@ -21,10 +21,10 @@
 
   handlers:
     - name: Get changed MOTD
-      ansible.builtin.shell: cat /etc/motd
+      ansible.builtin.command: cat /etc/motd
       register: motd_changed
 
     - name: Display new MOTD
       ansible.builtin.debug:
-        var: motd_changed
+        var: motd_changed.stdout
 ...
