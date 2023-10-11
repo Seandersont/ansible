@@ -9,7 +9,7 @@
       register: motd
 
     - ansible.builtin.debug:
-      var: motd
+        var: motd
 
     - name: Set MOTD
       ansible.builtin.template:
