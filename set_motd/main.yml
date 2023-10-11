@@ -12,13 +12,13 @@
         var: motd.stdout
 
     - name: Set MOTD
-      ansible.builtin.template:
-        src: template/motd
+      ansible.builtin.copy:
+        content: "{{ motd_block }}"
         dest: /etc/motd
       notify: 
         - Get changed MOTD
         - Display new MOTD
-        
+
   handlers:
     - name: Get Changed MOTD
       ansible.builtin.command: cat /etc/motd
