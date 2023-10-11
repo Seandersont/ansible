@@ -4,15 +4,27 @@
   vars:
   become: true
   tasks:
-    - name: Get MOTD with echo
+    - name: Get MOTD
       ansible.builtin.command: cat /etc/motd
       register: motd
 
     - ansible.builtin.debug:
-        var: motd
+        var: motd.stdout
 
     - name: Set MOTD
       ansible.builtin.template:
         src: template/motd
         dest: /etc/motd
+      notify: 
+        - Get changed MOTD
+        - Display new MOTD
+        
+  handlers:
+    - name: Get Changed MOTD
+      ansible.builtin.command: cat /etc/motd
+      register: motd_changed
+
+    - name: Display new MOTD
+      ansible.builtin.debug:
+        var: motd_changed.stdout
 ...
