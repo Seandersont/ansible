@@ -9,7 +9,7 @@
       register: motd
 
     - debug:
-      msg: {{motd}}
+      msg: "{{motd}}"
 
     - name: Set MOTD
       template:
