@@ -3,5 +3,11 @@
   hosts: goldsquad
   vars:
   tasks:
+    - name: Get MOTD with echo
+      ansible.builtin.command: cat /etc/motd
+
     - name: Set MOTD
+      template:
+        src: template/motd
+        dest: /etc/motd
 ...
