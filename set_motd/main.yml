@@ -20,7 +20,7 @@
         - Display new MOTD
 
   handlers:
-    - name: Get Changed MOTD
+    - name: Get changed MOTD
       ansible.builtin.command: cat /etc/motd
       register: motd_changed
 
