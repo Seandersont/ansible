@@ -8,11 +8,11 @@
       ansible.builtin.command: cat /etc/motd
       register: motd
 
-    - debug:
-      msg: "{{motd}}"
+    - ansible.builtin.debug:
+      var: motd
 
     - name: Set MOTD
-      template:
+      ansible.builtin.template:
         src: template/motd
         dest: /etc/motd
 ...
