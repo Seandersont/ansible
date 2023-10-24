@@ -23,7 +23,7 @@
     name: "{{ item.name }}"
     comment: "{{ item.comment }}"
     groups: "{{ item.groups }}"
-    password: "{{ password }}" 
+    password: "{{ password | password_hash('sha512', 'mysecretsalt') }}" 
     update_password: always
   loop: "{{ users }}"
 
