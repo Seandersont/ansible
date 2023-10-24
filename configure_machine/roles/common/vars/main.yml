@@ -13,8 +13,8 @@ users:
     comment: "User 3"
     groups: ''
 
-# Insert hashed password for created users
-password: ''
+# Remove hash to insert hashed password for created users
+# password: ''
 
 vim:
   src: .vim/
