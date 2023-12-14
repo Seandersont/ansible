@@ -12,12 +12,18 @@
     name: wheel
     state: present
 
+- name: Edit Sudoers file to not require password
+  lineinfile:
+    path: /etc/sudoers
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: '/usr/sbin/visudo -cf %s'
+
 - name: Verify users exist
   user:
     name: "{{ item.name }}"
     comment: "{{ item.comment }}"
     groups: "{{ item.groups }}"
-    password: "{{ password }}" 
+    password: "{{ password | password_hash('sha512', 'mysecretsalt') }}" 
     update_password: always
   loop: "{{ users }}"
 
@@ -89,9 +95,4 @@
     dest: /etc/bash.bashrc
   when: ansible_facts['os_family'] == "Debian"
 
-- name: Edit Sudoers file to not require password
-  lineinfile:
-    path: /etc/sudoers
-    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-    validate: '/usr/sbin/visudo -cf %s'
 ...
