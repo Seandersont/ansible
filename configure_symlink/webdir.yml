@@ -1,0 +1,45 @@
+---
+- name: Configure Webserver with index file
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Install httpd
+      ansible.builtin.dnf:
+        name: httpd
+        state: latest
+    - name: Configure Group
+      ansible.builtin.group:
+        name: webadmin
+        state: present
+    - name: Configure webdirectory
+      ansible.builtin.file:
+        path: /webdir
+        state: directory
+        group: webadmin
+        mode: '2775'
+    - name: Configure simulink
+      ansible.builtin.file:
+        src: /webdir
+        dest: /var/www/html/webdir
+        state: link
+    - name: create index file
+      ansible.builtin.template:
+        src: index.html.j2
+        dest: /webdir/index.html
+        setype: httpd_sys_content_t
+        group: webadmin
+    - name: start httpd
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+    - name: Configure Firewall Rule
+      ansible.builtin.firewalld:
+        zone: public
+        service: http
+        permanent: true
+        state: enabled
+    - name: restart firewall service
+      ansible.builtin.service:
+        name: firewalld
+        state: restarted
