@@ -1,0 +1,4 @@
+---
+mountPoint: /home/seandersont/tabletopGames/nfsshare
+nfsShare: truenas.seandersontech.com:/mnt/tank/nfsshare/foundryvtt
+

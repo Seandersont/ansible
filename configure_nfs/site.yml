@@ -1,0 +1,5 @@
+---
+- name: configure nfs shares
+  hosts: tabletop_Servers
+  roles:
+    - configure_ttrpg

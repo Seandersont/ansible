@@ -1,0 +1,9 @@
+---
+- name: Add tabletop rpg share
+  ansible.posix.mount:
+    path: "{{ mountPoint }}"
+    src: "{{ nfsShare }}"
+    opts: rw
+    fstype: nfs
+    state: mounted
+
