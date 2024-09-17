@@ -1,0 +1,6 @@
+---
+- name: install podman
+  dnf:
+    name: podman
+    state: latest
+

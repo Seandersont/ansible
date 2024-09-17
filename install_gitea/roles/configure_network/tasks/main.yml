@@ -1,0 +1,5 @@
+---
+- name: Create a podman network
+  containers.podman.podman_network:
+    name: gitea-net
+  become: true

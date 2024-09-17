@@ -1,0 +1,23 @@
+---
+- name: Create postgres container
+  containers.podman.podman_container:
+    name: gitea-app
+    state: started
+    network: gitea-net
+    image: gitea/gitea:latest-rootless
+    restart_policy: always
+    ports:
+      - "3000:3000"
+      - "2222:2222"
+    volume:
+      - ./data:/var/lib/gitea
+      - ./config:/etc/gitea
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    env:
+      GITEA__database__DB_TYPE: "postgres"
+      GITEA__database__HOST: "db:8080"
+      GITEA__database__NAME: "gitea"
+      GITEA__database__USER: "gitea"
+      GITEA__database__PASSWD: "MicrophoneExtensionBalb0a"
+
