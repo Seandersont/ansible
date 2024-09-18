@@ -1,0 +1,5 @@
+---
+collections:
+  - name: amazon.aws
+    source: https://old-galaxy.ansible.com
+  - name: geerlingguy.k8s

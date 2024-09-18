@@ -1,9 +1,28 @@
 ---
+- name: Install nfs packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - libnfsidmap
+    - sssd-nfs-idmap
+    - nfs-utils
+  become: true
 - name: Add gitea_db share
   ansible.posix.mount:
-    path: "{{ mountPoint }}"
-    src: "{{ nfsShare }}"
+    path: "{{ db_mountPoint }}"
+    src: "{{ db_nfsShare }}"
     opts: rw
     fstype: nfs
     state: mounted
+  become: true
+- name: Add gitea share
+  ansible.posix.mount:
+    path: "{{ gitea_mountPoint }}"
+    src: "{{ gitea_nfsShare }}"
+    opts: rw
+    fstype: nfs
+    state: mounted
+  become: true
+
 

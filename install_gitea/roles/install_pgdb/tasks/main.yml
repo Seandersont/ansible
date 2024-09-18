@@ -2,15 +2,15 @@
 - name: Create postgres container
   containers.podman.podman_container:
     name: gitea-pgdb
+    user: 1000
     state: started
     network: gitea-net
-    image: postgres
+    image: docker.io/postgres:latest
     restart_policy: "always"
+    tty: true
     shm_size: 128mb
-    ports:
-      - "8080:8080"
     volume: 
-      - "gitea-db:/home/seandersont/gitea_db:Z"
+      - /home/seandersont/gitea_db:/var/lib/postgresql/data
     env:
       POSTGRES_USER: "gitea"
       POSTGRES_PASSWORD: "MicrophoneExtensionBalb0a"

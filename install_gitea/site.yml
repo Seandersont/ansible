@@ -1,0 +1,10 @@
+---
+- name: Configure and install gitea
+  hosts: gitea_servers
+  become: true
+  roles:
+    - common
+    - configure_nfs
+    - configure_network
+    - install_pgdb
+    - install_gitea

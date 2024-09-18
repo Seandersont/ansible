@@ -1,4 +1,5 @@
 ---
-mountPoint: /home/seandersont/gitea_db
-nfsShare: truenas.seandersontech.com:/mnt/tank/nfsshare/gitea_db
-
+db_mountPoint: /home/seandersont/gitea_db
+db_nfsShare: truenas.seandersontech.com:/mnt/tank/nfsshare/gitea_db
+gitea_mountPoint: /home/seandersont/gitea
+gitea_nfsShare: truenas.seandersontech.com:/mnt/tank/nfsshare/gitea
