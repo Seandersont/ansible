@@ -3,10 +3,9 @@
   containers.podman.podman_container:
     name: gitea-pgdb
     user: 1000
-    state: started
+    state: quadlet
     network: gitea-net
     image: docker.io/postgres:latest
-    restart_policy: "always"
     tty: true
     shm_size: 128mb
     volume: 
@@ -15,4 +14,17 @@
       POSTGRES_USER: "gitea"
       POSTGRES_PASSWORD: "MicrophoneExtensionBalb0a"
       POSTGRES_DB: "gitea"
+    quadlet_options:
+      - "AutoUpdate=registry"
+      - |
+        [Install]
+        WantedBy=default.target
+
+
+- name: start gitea-app systemd unit
+  ansible.builtin.systemd:
+    name: gitea-pgdb
+    daemon_reload: true
+    state: started
+    enabled: true
 
